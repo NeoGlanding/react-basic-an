@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import logo from './logo.svg';
+import CardList from './card-list/card-list-component';
 import './App.css';
 
 class App extends Component {
@@ -14,16 +14,14 @@ class App extends Component {
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(res => res.json())
     .then(res =>this.setState({friends: res}))
+    .catch(err => console.log(err))
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          {this.state.friends.map(friend => <h1>{friend.name}</h1>)}
-        </header>
-    </div>
+      <div>
+        <CardList friends={this.state.friends} />
+      </div>
     )
   }
 }
