@@ -6,7 +6,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      friends: []
+      friends: [],
+      searchForm: ''
     }
   }
 
@@ -18,9 +19,12 @@ class App extends Component {
   }
 
   render() {
+    const {friends, searchForm} = this.state;
+    const filteredMonsters = friends.filter(friend => friend.name.toLowerCase().includes(searchForm.toLowerCase()));
     return (
       <div>
-        <CardList friends={this.state.friends} />
+        <input type="search" onChange={e => this.setState({searchForm: e.target.value}, () => console.log(this.state.searchForm))} />
+        <CardList friends={filteredMonsters} />
       </div>
     )
   }
